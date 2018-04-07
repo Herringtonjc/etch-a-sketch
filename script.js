@@ -1,11 +1,12 @@
 const gridContainer = document.getElementById("grid-container");
 const resetBtn = document.getElementById("reset");
+const resizeBtn = document.getElementById("resize");
 
 let gridNumber;
 let gridSize = 16;
-let userGridSize;
 
 resetBtn.addEventListener("click", resetGrid);
+resizeBtn.addEventListener("click", resizeGrid);
 
 function createGrid(gridSize) {
     gridNumber = "auto ".repeat(gridSize);
@@ -29,8 +30,16 @@ function resetGrid() {
         gridContainer.removeChild(gridContainer.firstChild);
     }
 
-    userGridSize = prompt("Please enter a new size for the grid");
-    createGrid(userGridSize);
+    createGrid(gridSize);
+}
+
+function resizeGrid() {
+    while (gridContainer.firstChild) {
+        gridContainer.removeChild(gridContainer.firstChild);
+    }
+
+    gridSize = prompt("Please enter a new size for the grid");
+    createGrid(gridSize);
 }
 
 createGrid(gridSize);
