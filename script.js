@@ -2,14 +2,24 @@ const gridContainer = document.getElementById("grid-container");
 const resetBtn = document.getElementById("reset");
 const resizeBtn = document.getElementById("resize");
 const borderBtn = document.getElementById("border");
+const eraserBtn = document.getElementById("eraser");
 
 let gridNumber;
 let gridSize = 16;
 let gridItemBorders = false;
+let eraserMode = false;
 
 resetBtn.addEventListener("click", resetGrid);
 resizeBtn.addEventListener("click", resizeGrid);
 borderBtn.addEventListener("click", addBorder);
+eraserBtn.addEventListener("click", () => 
+{if (!eraserMode) {
+    eraserMode = true;
+} else {
+    eraserMode = false;
+}});
+
+
 
 function createGrid(gridSize) {
     gridNumber = "auto ".repeat(gridSize);
@@ -35,7 +45,11 @@ function createGrid(gridSize) {
 }
 
 function colorItem(event) {
+    if (!eraserMode) {
     event.target.style.backgroundColor = "#000";
+    } else {
+        event.target.style.backgroundColor = "#fff";
+    }
 }
 
 function resetGrid() {
