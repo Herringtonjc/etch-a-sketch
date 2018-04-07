@@ -9,7 +9,7 @@ header {
     margin: auto;
     display: grid;
     height: 400px;
-    width: 800px;
+    width: 400px;
     background-color: #fff;
     border: 1px solid #000;
 }
@@ -17,6 +17,4 @@ header {
 .grid-item {
     height: auto;
     width: auto;
-    background-color: chartreuse;
-    border: 1px solid #000;
 }
