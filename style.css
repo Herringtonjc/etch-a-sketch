@@ -5,17 +5,30 @@ header {
     margin: 50px 0 50px 0;
 }
 
-#reset {
-    display: block;
-    margin: 0 auto;
-    margin-bottom: 20px;
+#button-group {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+#button-group button {
+    margin-left: 20px;
+    border: 1px solid #d6d6d6;
+    background-color: #fff;
+    padding: 25px;
+    font-size: 15px;
+    -webkit-transition: border 2s;
+    transition: border 2s;
+}
+
+#button-group button:hover {
+    border: 1px solid #000;
 }
 
 #grid-container {
     margin: auto;
     display: grid;
-    height: 400px;
-    width: 400px;
+    height: 600px;
+    width: 600px;
     background-color: #fff;
     border: 1px solid #000;
 }
