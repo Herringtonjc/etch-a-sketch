@@ -3,6 +3,7 @@ const resetBtn = document.getElementById("reset");
 const resizeBtn = document.getElementById("resize");
 const borderBtn = document.getElementById("border");
 const eraserBtn = document.getElementById("eraser");
+const status = document.getElementById("status");
 
 let gridNumber;
 let gridSize = 16;
@@ -81,8 +82,10 @@ function addBorder() {
 function eraseGrid() {
     if (!eraserMode) {
         eraserMode = true;
+        status.innerHTML = "Eraser Mode is Active";
     } else {
         eraserMode = false;
+        status.innerHTML = "Eraser Mode is Inactive";
     }
 }
 
