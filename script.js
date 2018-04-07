@@ -1,5 +1,4 @@
 const gridContainer = document.getElementById("grid-container");
-const createBtn = document.getElementById("create");
 
 let gridNumber;
 let gridSize = 16;
@@ -13,7 +12,12 @@ function createGrid(gridSize) {
         const gridItem = document.createElement("div");
         gridItem.classList.add("grid-item");
         gridContainer.appendChild(gridItem);
+        gridItem.addEventListener("mouseover", colorItem);
     }
 }
 
-createBtn.addEventListener("click", () => createGrid(gridSize));
+function colorItem(event) {
+    event.target.style.backgroundColor = "#000";
+}
+
+createGrid(gridSize);
