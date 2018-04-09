@@ -1,55 +1,85 @@
 const gridContainer = document.getElementById("grid-container");
+const status = document.getElementById("status");
+
+const defaultBtn = document.getElementById("default");
+const eraserBtn = document.getElementById("eraser");
+const rainbowBtn = document.getElementById("colorful");
+const pencilBtn = document.getElementById("pencil");
+
 const resetBtn = document.getElementById("reset");
 const resizeBtn = document.getElementById("resize");
 const borderBtn = document.getElementById("border");
-const eraserBtn = document.getElementById("eraser");
-const eStatus = document.getElementById("eraser-status");
-const cStatus = document.getElementById("colorful-status");
-const colorfulBtn = document.getElementById("colorful");
 
 let gridNumber;
 let gridSize = 16;
 let gridItemBorders = false;
-let eraserMode = false;
-let colorfulMode = false;
+let mode = "default";
+
+
+defaultBtn.addEventListener("click", defaultGrid);
+eraserBtn.addEventListener("click", eraseGrid);
+rainbowBtn.addEventListener("click", rainbowGrid);
+pencilBtn.addEventListener("click", pencilGrid);
 
 resetBtn.addEventListener("click", resetGrid);
 resizeBtn.addEventListener("click", resizeGrid);
 borderBtn.addEventListener("click", addBorder);
-eraserBtn.addEventListener("click", eraseGrid);
-colorfulBtn.addEventListener("click", rainbowGrid)
 
 function createGrid(gridSize) {
     gridNumber = "auto ".repeat(gridSize);
     gridContainer.style.gridTemplateRows = `${gridNumber}`;
     gridContainer.style.gridTemplateColumns = `${gridNumber}`;
 
-    if (!gridItemBorders) {
-        for (let i = 0; i < gridSize * gridSize; i++) {
-            const gridItem = document.createElement("div");
-            gridItem.classList.add("grid-item");
-            gridContainer.appendChild(gridItem);
-            gridItem.addEventListener("mouseover", colorItem);
-        }
-    } else {
-        for (let i = 0; i < gridSize * gridSize; i++) {
-            const gridItem = document.createElement("div");
-            gridItem.classList.add("grid-item");
-            gridContainer.appendChild(gridItem);
-            gridItem.addEventListener("mouseover", colorItem);
-            gridItem.style.border = "0.5px solid #000";
-        }
+    for (let i = 0; i < gridSize * gridSize; i++) {
+        const gridItem = document.createElement("div");
+        gridItem.classList.add("grid-item");
+        gridContainer.appendChild(gridItem);
+        gridItem.addEventListener("mouseover", colorItem);
     }
 }
 
 function colorItem(event) {
-    if (!eraserMode && !colorfulMode) {
-    event.target.style.backgroundColor = "#000";
-    } else if (!eraserMode && colorfulMode) {
-        event.target.style.backgroundColor = "rgb(" + randomColor() + ","  + randomColor() + "," + randomColor() + ")";
-    } else {
+    if (mode === "default") {
+        event.target.style.backgroundColor = "#000";
+    } else if (mode === "erase") {
         event.target.style.backgroundColor = "#fff";
+    } else if (mode === "rainbow") {
+        event.target.style.backgroundColor = "rgb(" + randomColor() + ","  + randomColor() + "," + randomColor() + ")";
+    } else if (mode === "pencil") {
+        /*Need to fix the gradient ability!*/
+/*         let opacity = 0;
+
+        if (opacity == 0) {
+            opacity = opacity + 0.1;
+            event.target.style.backgroundColor = `rgba(0, 0, 0, ${opacity})`;
+        } else {
+            opacity = opacity + 0.1;
+            event.target.style.backgroundColor = `rgba(0, 0, 0, ${opacity})`;
+        } */
+    } else {
+        //This should never be reacher, only used as a fallback
+        event.target.style.backgroundColor = "#000";
     }
+}
+
+function defaultGrid() {
+    mode = "default";
+    status.innerHTML = "Default Mode is Active";
+}
+
+function eraseGrid() {
+    mode = "erase";
+    status.innerHTML = "Eraser Mode is Active";
+}
+
+function rainbowGrid() {
+    mode = "rainbow";
+    status.innerHTML = "Rainbow Mode is Active";
+}
+
+function pencilGrid() {
+    mode = "pencil";
+    status.innerHTML = "Pencil Mode is Active";
 }
 
 function resetGrid() {
@@ -72,40 +102,20 @@ function resizeGrid() {
 function addBorder() {
     if (!gridItemBorders) {
         gridItemBorders = true;
+        let squares = document.querySelectorAll(".grid-item");
+        squares.forEach(function(square)
+    {square.style.border = "0.5px solid #000"});
     } else {
         gridItemBorders = false;
-    }
-
-    while (gridContainer.firstChild) {
-        gridContainer.removeChild(gridContainer.firstChild);
-    }
-
-    createGrid(gridSize);
-}
-
-function eraseGrid() {
-    if (!eraserMode) {
-        eraserMode = true;
-        eStatus.innerHTML = "Eraser Mode is Active";
-    } else {
-        eraserMode = false;
-        eStatus.innerHTML = "Eraser Mode is Inactive";
+        let squares = document.querySelectorAll(".grid-item");
+        squares.forEach(function(square)
+    {square.style.border = "none"});
     }
 }
 
 function randomColor() {
     let randomColor = Math.floor(Math.random() * 257);
     return randomColor;
-}
-
-function rainbowGrid() {
-    if (!colorfulMode) {
-        colorfulMode = true;
-        cStatus.innerHTML = "Colorful Mode is Active";
-    } else {
-        colorfulMode = false;
-        cStatus.innerHTML = "Colorful Mode is Inactive";
-    }
 }
 
 createGrid(gridSize);
