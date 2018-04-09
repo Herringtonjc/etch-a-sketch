@@ -3,19 +3,21 @@ const resetBtn = document.getElementById("reset");
 const resizeBtn = document.getElementById("resize");
 const borderBtn = document.getElementById("border");
 const eraserBtn = document.getElementById("eraser");
-const status = document.getElementById("status");
+const eStatus = document.getElementById("eraser-status");
+const cStatus = document.getElementById("colorful-status");
+const colorfulBtn = document.getElementById("colorful");
 
 let gridNumber;
 let gridSize = 16;
 let gridItemBorders = false;
 let eraserMode = false;
+let colorfulMode = false;
 
 resetBtn.addEventListener("click", resetGrid);
 resizeBtn.addEventListener("click", resizeGrid);
 borderBtn.addEventListener("click", addBorder);
 eraserBtn.addEventListener("click", eraseGrid);
-
-
+colorfulBtn.addEventListener("click", rainbowGrid)
 
 function createGrid(gridSize) {
     gridNumber = "auto ".repeat(gridSize);
@@ -41,8 +43,10 @@ function createGrid(gridSize) {
 }
 
 function colorItem(event) {
-    if (!eraserMode) {
+    if (!eraserMode && !colorfulMode) {
     event.target.style.backgroundColor = "#000";
+    } else if (!eraserMode && colorfulMode) {
+        event.target.style.backgroundColor = "rgb(" + randomColor() + ","  + randomColor() + "," + randomColor() + ")";
     } else {
         event.target.style.backgroundColor = "#fff";
     }
@@ -82,10 +86,25 @@ function addBorder() {
 function eraseGrid() {
     if (!eraserMode) {
         eraserMode = true;
-        status.innerHTML = "Eraser Mode is Active";
+        eStatus.innerHTML = "Eraser Mode is Active";
     } else {
         eraserMode = false;
-        status.innerHTML = "Eraser Mode is Inactive";
+        eStatus.innerHTML = "Eraser Mode is Inactive";
+    }
+}
+
+function randomColor() {
+    let randomColor = Math.floor(Math.random() * 257);
+    return randomColor;
+}
+
+function rainbowGrid() {
+    if (!colorfulMode) {
+        colorfulMode = true;
+        cStatus.innerHTML = "Colorful Mode is Active";
+    } else {
+        colorfulMode = false;
+        cStatus.innerHTML = "Colorful Mode is Inactive";
     }
 }
 
