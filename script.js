@@ -46,16 +46,7 @@ function colorItem(event) {
     } else if (mode === "rainbow") {
         event.target.style.backgroundColor = "rgb(" + randomColor() + ","  + randomColor() + "," + randomColor() + ")";
     } else if (mode === "pencil") {
-        /*Need to fix the gradient ability!*/
-/*         let opacity = 0;
-
-        if (opacity == 0) {
-            opacity = opacity + 0.1;
-            event.target.style.backgroundColor = `rgba(0, 0, 0, ${opacity})`;
-        } else {
-            opacity = opacity + 0.1;
-            event.target.style.backgroundColor = `rgba(0, 0, 0, ${opacity})`;
-        } */
+        /*Need to fix the gradient*/
     } else {
         //This should never be reacher, only used as a fallback
         event.target.style.backgroundColor = "#000";
