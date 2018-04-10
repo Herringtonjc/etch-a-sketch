@@ -46,7 +46,23 @@ function colorItem(event) {
     } else if (mode === "rainbow") {
         event.target.style.backgroundColor = "rgb(" + randomColor() + ","  + randomColor() + "," + randomColor() + ")";
     } else if (mode === "pencil") {
-        /*Need to fix the gradient*/
+        let background = this.style.backgroundColor;
+        if (!background) {
+            this.style.backgroundColor = "rgba(0, 0, 0, 0.1)";
+        } else {
+            let length = background.length;
+
+            background = background.split("");
+
+            let currentOpactiy = background.slice(length - 4, length - 1);
+            currentOpactiy = currentOpactiy.join("");
+
+            let newOpacity = parseFloat(currentOpactiy) + 0.1;
+            newOpacity = newOpacity.toFixed(1);
+
+            background = background.join("").replace(currentOpactiy, newOpacity);
+            this.style.backgroundColor = background;
+        }
     } else {
         //This should never be reacher, only used as a fallback
         event.target.style.backgroundColor = "#000";
