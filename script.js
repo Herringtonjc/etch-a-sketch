@@ -71,22 +71,22 @@ function colorItem(event) {
 
 function defaultGrid() {
     mode = "default";
-    status.innerHTML = "Default Mode is Active";
+    status.textContent = "Default Mode is Active";
 }
 
 function eraseGrid() {
     mode = "erase";
-    status.innerHTML = "Eraser Mode is Active";
+    status.textContent = "Eraser Mode is Active";
 }
 
 function rainbowGrid() {
     mode = "rainbow";
-    status.innerHTML = "Rainbow Mode is Active";
+    status.textContent = "Rainbow Mode is Active";
 }
 
 function pencilGrid() {
     mode = "pencil";
-    status.innerHTML = "Pencil Mode is Active";
+    status.textContent = "Pencil Mode is Active";
 }
 
 function resetGrid() {
